@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 整合MyBatis -->
-    <context:property-path path="jdbc.properties"/>
+    <context:property-placeholder location="classpath:jdbc.properties"/>
 
     <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
         <property name="driverClass" value="${jdbc.driver}"/>
@@ -21,13 +22,14 @@
     </bean>
 
     <!-- sqlSessionFactory -->
-    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
-        <property name="dataSource" ref="dataSource"/>
-        <!-- 配置文件 -->
-        <property name="configLocation" value="mybatis-config.xml"/>
-        <property name="typeAliasesPackage" value="com.xsyu.entity"/>
-        <!-- 扫描sql配置文件 -->
-        <property name="mapperLocations" value="classpath*:mapper"/>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- mybatis-config.xml -->
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <property name="typeAliasesPackage" value="com.imooc.entity" />
+        <!-- mapper -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml" />
     </bean>
 
     <!-- 扫描dao层 -->

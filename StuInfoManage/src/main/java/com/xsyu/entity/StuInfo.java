@@ -1,5 +1,8 @@
 package com.xsyu.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StuInfo {
     private int stuId;
     private String stuName;
@@ -10,6 +13,13 @@ public class StuInfo {
         this.stuName = stuName;
         this.stuGender = stuGender;
     }
+
+    public StuInfo(String stuName, String stuGender) {
+        this.stuName = stuName;
+        this.stuGender = stuGender;
+    }
+
+    public StuInfo(){}
 
     public int getStuId() {
         return stuId;
@@ -33,5 +43,14 @@ public class StuInfo {
 
     public void setStuGender(String stuGender) {
         this.stuGender = stuGender;
+    }
+
+    @Override
+    public String toString() {
+        return "StuInfo{" +
+                "stuId=" + stuId +
+                ", stuName='" + stuName + '\'' +
+                ", stuGender='" + stuGender + '\'' +
+                '}';
     }
 }
