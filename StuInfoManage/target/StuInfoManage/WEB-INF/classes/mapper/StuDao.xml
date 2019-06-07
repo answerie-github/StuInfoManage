@@ -9,4 +9,35 @@
         FROM
         stu_info
     </select>
+
+    <insert id="insertStu" keyColumn="stu_id" keyProperty="stuId">
+        INSERT INTO
+        stu_info(stu_id,stu_name,stu_gender)
+        VALUE (
+        #{stuId},#{stuName},#{stuGender}
+        )
+    </insert>
+
+    <update id="updateStu" parameterType="com.xsyu.entity.StuInfo">
+        UPDATE stu_info
+        <set>
+            <if test="stuName != null and stuName != ''">
+                stu_name = #{stuName},
+            </if>
+            <if test="stuGender != null and stuGender != ''">
+                stu_gender=#{stuGender}
+            </if>
+        </set>
+        WHERE
+        stu_id = #{stuId}
+    </update>
+
+    <delete id="deleteStu" parameterType="com.xsyu.entity.StuInfo">
+        DELETE FROM
+        stu_info
+        <where>
+            <if test="stuName != null and stuName != ''">stu_name=#{stuName} </if>
+            <if test="stuId != 0">AND stu_id=#{stuId} </if>
+        </where>
+    </delete>
 </mapper>

@@ -12,9 +12,9 @@
 
     <insert id="insertStu" keyColumn="stu_id" keyProperty="stuId">
         INSERT INTO
-        stu_info(stu_id,stu_name,stu_gender)
+        stu_info(stu_id,stu_name,stu_gender,stu_img,stu_state)
         VALUE (
-        #{stuId},#{stuName},#{stuGender}
+        #{stuId},#{stuName},#{stuGender},#{stuImg},#{stuState}
         )
     </insert>
 
@@ -25,7 +25,10 @@
                 stu_name = #{stuName},
             </if>
             <if test="stuGender != null and stuGender != ''">
-                stu_gender=#{stuGender}
+                stu_gender=#{stuGender},
+            </if>
+            <if test="stuImg != null and stuImg != ''">
+                stu_img=#{stuImg}
             </if>
         </set>
         WHERE
