@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>学生信息首页</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <div class="card">
+            <div class="card-header">学生信息:</div>
+            <div class="card-content">
+                <div class="list-block media-list">
+                    <!-- <ul>
+                        <li class="item-content">
+                            <div class="item-media">
+                                <img id="stu-img" width="44">学生照片
+                            </div>
+                            <div class="item-inner">
+                                <div class="item-title-row">
+                                    <div class="item-title" id="stu-name">学生姓名</div>
+                                </div>
+                                <div class="item-subtitle" id="stu-gender">学生性别</div>
+                            </div>
+                        </li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+<script type="text/javascript">
+    $(function () {
+        getlist();
+
+        function getlist(e) {
+            $.ajax({
+                url:"/StuInfoManage/stuadmin/stuList",
+                type:"get",
+                dataType:"json",
+                success:function (data) {
+                    handleList(data.stuList);
+                }
+            });
+        }
+
+        function handleList(data) {
+            var html = '';
+            data.map(function (value, index) {
+                html += '<ul>' +
+                    '<li class="item-content">' +
+                    '<div class="item-media">' +
+                    '<img src="' +
+                    value.stuImg +
+                    '" width="44">' +
+                    '</div>' +
+                    '<div class="item-inner">' +
+                    '<div class="item-title-row">' +
+                    '<div class="item-title" id="stu-name">' +
+                    value.stuName +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="item-subtitle" id="stu-gender">' +
+                    value.stuGender +
+                    '</div>' +
+                    '</div>' +
+                    '</li>' +
+                    '</ul>';
+            })
+            $('list-block media-list').html(html);
+        }
+    })
+</script>
+</body>
+</html>

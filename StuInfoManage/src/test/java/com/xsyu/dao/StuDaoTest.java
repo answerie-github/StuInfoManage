@@ -22,8 +22,10 @@ public class StuDaoTest extends BaseTest {
 
     @Test
     public void TestInsertStu(){
-        //StuInfo stuInfo = new StuInfo("任涛","男");
-        //System.out.println(stuDao.insertStu(stuInfo));
+        StuInfo stuInfo = new StuInfo();
+        stuInfo.setStuName("深海晶");
+        stuInfo.setStuGender("女");
+        stuDao.insertStu(stuInfo);
     }
 
     @Test
